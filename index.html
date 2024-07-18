@@ -1,0 +1,501 @@
+<html><head><base href="https://gradcalc.edu.tw/"><title>電子科畢業學分計算器 - GradCalc</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+    
+    :root {
+        --primary-color: #3498db;
+        --secondary-color: #2ecc71;
+        --background-color: #ecf0f1;
+        --text-color: #34495e;
+        --border-color: #bdc3c7;
+    }
+
+    body {
+        font-family: 'Noto Sans TC', sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .container:hover {
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    h1, h2, h3 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    h1 {
+        font-size: 2.8em;
+        margin-top: 0;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+        position: relative;
+    }
+
+    h1::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background-color: var(--secondary-color);
+        transition: all 0.3s ease;
+    }
+
+    .container:hover h1::after {
+        width: 100%;
+        left: 0;
+    }
+
+    .semester {
+        margin-bottom: 40px;
+        border: 1px solid var(--border-color);
+        padding: 25px;
+        border-radius: 12px;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .semester::before {
+        content: '';
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(52, 152, 219, 0.1), transparent);
+        transition: all 0.5s ease;
+    }
+
+    .semester:hover::before {
+        top: 0;
+    }
+
+    .semester:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: translateY(-5px);
+    }
+
+    .semester h3 {
+        margin-top: 0;
+        background-color: var(--primary-color);
+        color: #fff;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 1.3em;
+        transition: all 0.3s ease;
+    }
+
+    .semester:hover h3 {
+        background-color: var(--secondary-color);
+    }
+
+    .subject {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        transition: all 0.2s ease;
+        padding: 8px;
+        border-radius: 5px;
+    }
+
+    .subject:hover {
+        background-color: #e8f4fd;
+        transform: translateX(5px);
+    }
+
+    .subject input[type="checkbox"] {
+        margin-right: 12px;
+        transform: scale(1.2);
+        transition: all 0.2s ease;
+    }
+
+    .subject input[type="checkbox"]:checked + label {
+        color: var(--secondary-color);
+        font-weight: bold;
+    }
+
+    label {
+        display: inline-block;
+        margin-left: 5px;
+        font-size: 1.05em;
+        color: var(--text-color);
+        transition: all 0.2s ease;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background-color: var(--secondary-color);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 40px;
+        font-size: 1.2em;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        position: relative;
+        overflow: hidden;
+    }
+
+    button::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background-color: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        transition: all 0.5s ease;
+    }
+
+    button:hover::before {
+        width: 300px;
+        height: 300px;
+        margin-left: -150px;
+        margin-top: -150px;
+    }
+
+    button:hover {
+        background-color: #27ae60;
+        transform: translateY(-2px);
+    }
+
+    #result {
+        margin-top: 40px;
+        padding: 25px;
+        background-color: #e8f6fc;
+        border-left: 6px solid var(--primary-color);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    #result.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .requirement {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+
+    .requirement:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .requirement h3 {
+        color: var(--primary-color);
+        margin-top: 0;
+        font-size: 1.2em;
+    }
+
+    .met {
+        color: #27ae60;
+        font-weight: bold;
+    }
+
+    .not-met {
+        color: #e74c3c;
+        font-weight: bold;
+    }
+
+    .select-all {
+        display: inline-block;
+        margin-bottom: 15px;
+        padding: 8px 15px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .select-all:hover {
+        background-color: var(--secondary-color);
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 20px;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 2.2em;
+        }
+        .semester {
+            padding: 15px;
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4);
+        }
+        70% {
+            box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+        }
+    }
+
+    .pulse {
+        animation: pulse 1.5s infinite;
+    }
+</style></head><body>
+    <div class="container">
+        <h1>電子科畢業學分計算器</h1>
+        <form id="creditForm">
+            <div class="semester">
+                <h3>高一上學期</h3>
+                <button type="button" class="select-all" data-semester="1">全選本學期</button>
+                <div class="subject"><input type="checkbox" id="s1_1" value="3"><label for="s1_1">國語文 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_2" value="2"><label for="s1_2">英語文 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_3" value="1"><label for="s1_3">本土語 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_4" value="4"><label for="s1_4">數學 (4學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_5" value="2"><label for="s1_5">化學 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_6" value="1"><label for="s1_6">美術 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_7" value="1"><label for="s1_7">資訊科技 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_8" value="1"><label for="s1_8">健康與護理 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_9" value="2"><label for="s1_9">體育 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_10" value="1"><label for="s1_10">全民國防教育 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_11" value="3"><label for="s1_11">基本電學 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_12" value="3"><label for="s1_12">程式設計實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_13" value="3"><label for="s1_13">基礎電子學實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_14" value="2"><label for="s1_14">基礎電路學 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_15" value="1"><label for="s1_15">論孟選讀 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_16" value="2"><label for="s1_16">英文文法 (2學分)</label></div>
+            </div>
+
+            <div class="semester">
+                <h3>高一下學期</h3>
+                <button type="button" class="select-all" data-semester="2">全選本學期</button>
+                <div class="subject"><input type="checkbox" id="s2_1" value="3"><label for="s2_1">國語文 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_2" value="2"><label for="s2_2">英語文 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_3" value="1"><label for="s2_3">本土語 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_4" value="4"><label for="s2_4">數學 (4學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_5" value="2"><label for="s2_5">物理 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_6" value="1"><label for="s2_6">美術 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_7" value="1"><label for="s2_7">資訊科技 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_8" value="1"><label for="s2_8">健康與護理 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_9" value="2"><label for="s2_9">體育 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_10" value="1"><label for="s2_10">全民國防教育 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_11" value="3"><label for="s2_11">基本電學 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_12" value="3"><label for="s2_12">基本電學實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_13" value="3"><label for="s2_13">基礎電子學實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_14" value="2"><label for="s2_14">基礎電子學 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_15" value="1"><label for="s2_15">論孟選讀 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_16" value="2"><label for="s2_16">英文文法 (2學分)</label></div>
+            </div>
+
+            <div class="semester">
+                <h3>高二上學期</h3>
+                <button type="button" class="select-all" data-semester="3">全選本學期</button>
+                <div class="subject"><input type="checkbox" id="s3_1" value="3"><label for="s3_1">國語文 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_2" value="2"><label for="s3_2">英語文 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_3" value="2"><label for="s3_3">地理 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_4" value="1"><label for="s3_4">音樂 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_5" value="2"><label for="s3_5">體育 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_6" value="3"><label for="s3_6">電子學 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_7" value="3"><label for="s3_7">數位邏輯設計 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_8" value="3"><label for="s3_8">電子學實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_9" value="3"><label for="s3_9">可程式邏輯設計實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_10" value="3"><label for="s3_10">行動裝置實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_11" value="4"><label for="s3_11">數學 (4學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_12" value="1"><label for="s3_12">論孟選讀 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_13" value="2"><label for="s3_13">英文文法 (2學分)</label></div>
+            </div>
+
+            <div class="semester">
+                <h3>高二下學期</h3>
+                <button type="button" class="select-all" data-semester="4">全選本學期</button>
+                <div class="subject"><input type="checkbox" id="s4_1" value="3"><label for="s4_1">國語文 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_2" value="2"><label for="s4_2">英語文 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_3" value="2"><label for="s4_3">歷史 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_4" value="1"><label for="s4_4">音樂 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_5" value="2"><label for="s4_5">體育 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_6" value="3"><label for="s4_6">電子學 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_7" value="3"><label for="s4_7">微處理機 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_8" value="3"><label for="s4_8">電子學實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_9" value="3"><label for="s4_9">單晶片微處理機實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_10" value="3"><label for="s4_10">電腦繪圖實習或數位系統設計實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_11" value="4"><label for="s4_11">數學 (4學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_12" value="1"><label for="s4_12">論孟選讀 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_13" value="2"><label for="s4_13">英文文法 (2學分)</label></div>
+            </div>
+
+            <div class="semester">
+                <h3>高三上學期</h3>
+                <button type="button" class="select-all" data-semester="5">全選本學期</button>
+                <div class="subject"><input type="checkbox" id="s5_1" value="2"><label for="s5_1">國語文 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_2" value="2"><label for="s5_2">英語文 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_3" value="2"><label for="s5_3">生活科技 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_4" value="2"><label for="s5_4">體育 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_5" value="3"><label for="s5_5">微電腦應用實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_6" value="4"><label for="s5_6">專題實作 (4學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_7" value="3"><label for="s5_7">電路板設計與製作實習或數位電路應用實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_8" value="2"><label for="s5_8">電路學 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_9" value="2"><label for="s5_9">電子電路 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_10" value="2"><label for="s5_10">微電腦結構 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_11" value="4"><label for="s5_11">數學 (4學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_12" value="1"><label for="s5_12">論孟選讀 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_13" value="2"><label for="s5_13">英文文法 (2學分)</label></div>
+            </div>
+
+            <div class="semester">
+                <h3>高三下學期</h3>
+                <button type="button" class="select-all" data-semester="6">全選本學期</button>
+                <div class="subject"><input type="checkbox" id="s6_1" value="2"><label for="s6_1">國語文 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_2" value="2"><label for="s6_2">英語文 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_3" value="2"><label for="s6_3">公民 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_4" value="2"><label for="s6_4">體育 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_5" value="3"><label for="s6_5">介面電路控制實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_6" value="4"><label for="s6_6">創意專題實作 (4學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_7" value="3"><label for="s6_7">電子電路實習或嵌入式系統實習 (3學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_8" value="2"><label for="s6_8">電路學 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_9" value="2"><label for="s6_9">電子電路 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_10" value="2"><label for="s6_10">微電腦結構 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_11" value="4"><label for="s6_11">數學 (4學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_12" value="1"><label for="s6_12">論孟選讀 (1學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_13" value="2"><label for="s6_13">英文文法 (2學分)</label></div>
+            </div>
+
+            <button type="submit">計算畢業學分</button>
+        </form>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('creditForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let totalCredits = 0;
+            let requiredCredits = 0;
+            let majorCredits = 0;
+            let practiceCredits = 0;
+
+            const requiredSubjects = ['國語文', '英語文', '數學', '物理', '化學', '美術', '音樂', '體育', '全民國防教育', '健康與護理', '生活科技', '公民', '歷史', '地理', '本土語', '論孟選讀', '英文文法'];
+            const practiceSubjects = ['程式設計實習', '基本電學實習', '電子學實習', '可程式邏輯設計實習', '行動裝置實習', '單晶片微處理機實習', '微電腦應用實習', '專題實作',  '介面電路控制實習', '創意專題實作', '基礎電子學實習', '電子電路實習或嵌入式系統實習','電路板設計與製作實習或數位電路應用實習','電腦繪圖實習或數位系統設計實習'];
+
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(checkbox) {
+                const credits = parseInt(checkbox.value);
+                const subjectName = checkbox.nextElementSibling.textContent.split('(')[0].trim();
+
+                totalCredits += credits;
+
+                if (requiredSubjects.includes(subjectName)) {
+                    requiredCredits += credits;
+                }
+
+                if (!requiredSubjects.includes(subjectName)) {
+                    majorCredits += credits;
+                }
+
+                if (practiceSubjects.includes(subjectName)) {
+                    practiceCredits += credits;
+                }
+            });
+
+            let resultHTML = '<h2>畢業要求檢查結果</h2>';
+            
+            function addRequirement(title, current, required, isMet) {
+                return `
+                    <div class="requirement">
+                        <h3>${title}</h3>
+                        <p class="${isMet ? 'met' : 'not-met'}">
+                            ${isMet ? '✓' : '✗'} 目前學分：${current} / 要求學分：${required}
+                            ${isMet ? '' : `（還差 ${required - current} 學分）`}
+                        </p>
+                    </div>
+                `;
+            }
+
+            resultHTML += addRequirement('實得總學分', totalCredits, 160, totalCredits >= 160);
+            resultHTML += addRequirement('部定必修學分', requiredCredits, 100, requiredCredits >= 100);
+            resultHTML += addRequirement('專業科目及實習科目學分', majorCredits, 60, majorCredits >= 60);
+            resultHTML += addRequirement('實習（含實驗、實務）科目學分', practiceCredits, 45, practiceCredits >= 45);
+
+            if (totalCredits >= 160 && requiredCredits >= 100 && majorCredits >= 60 && practiceCredits >= 45) {
+                resultHTML += '<p class="met pulse" style="font-size: 1.3em; text-align: center; margin-top: 25px; padding: 15px; background-color: #e8f5e9; border-radius: 8px;"><strong>恭喜！您已達到所有畢業要求。</strong></p>';
+            } else {
+                resultHTML += '<p class="not-met" style="font-size: 1.3em; text-align: center; margin-top: 25px; padding: 15px; background-color: #ffebee; border-radius: 8px;"><strong>您尚未達到所有畢業要求，請查看上方詳細資訊。</strong></p>';
+            }
+            
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = resultHTML;
+            resultElement.classList.remove('show');
+            void resultElement.offsetWidth; // 觸發重排
+            resultElement.classList.add('show');
+            resultElement.scrollIntoView({behavior: 'smooth'});
+        });
+
+        // 添加點擊效果
+        document.querySelectorAll('.subject').forEach(subject => {
+            subject.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'INPUT') {
+                    const checkbox = this.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+                }
+                this.classList.add('clicked');
+                setTimeout(() => {
+                    this.classList.remove('clicked');
+                }, 300);
+            });
+        });
+
+        // 添加滑鼠懸停效果
+        document.querySelectorAll('.semester').forEach(semester => {
+            semester.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            semester.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // 添加全選功能
+        document.querySelectorAll('.select-all').forEach(button => {
+            button.addEventListener('click', function() {
+                const semester = this.getAttribute('data-semester');
+                const checkboxes = document.querySelectorAll(`input[id^="s${semester}_"]`);
+                const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+                
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = !allChecked;
+                });
+
+                this.textContent = allChecked ? '全選本學期' : '取消全選';
+            });
+        });
+    </script>
+</body></html>
