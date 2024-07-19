@@ -1,4 +1,4 @@
-<html><head><base href="https://gradcalc.edu.tw/"><title>電子科畢業學分計算器 - GradCalc</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>
+<html><head><title>電子科畢業學分計算器 - GradCalc</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
     
     :root {
@@ -243,16 +243,75 @@
         background-color: var(--secondary-color);
     }
 
+    .subject-type {
+        font-size: 0.8em;
+        padding: 2px 5px;
+        border-radius: 3px;
+        margin-left: 5px;
+    }
+
+    .required {
+        background-color: #3498db;
+        color: white;
+    }
+
+    .practice {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    .major {
+        background-color: #f39c12;
+        color: white;
+    }
+
+    .both {
+        background-color: #9b59b6;
+        color: white;
+    }
+    .intern {
+        background-color: #e600ff;
+        color: white;
+    }
+    .experiment {
+        background-color: #008f4c;
+        color: white;
+    }
+    .internship {
+        background-color: #008f4c;
+        color: white;
+    }
+
     @media (max-width: 768px) {
         .container {
             padding: 20px;
-            margin: 20px;
+            margin: 20px 10px;
         }
         h1 {
-            font-size: 2.2em;
+            font-size: 2em;
         }
         .semester {
             padding: 15px;
+        }
+        .subject {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .subject input[type="checkbox"] {
+            margin-right: 0;
+            margin-bottom: 5px;
+        }
+        label {
+            font-size: 0.95em;
+        }
+        .select-all {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        button {
+            font-size: 1em;
+            padding: 12px;
         }
     }
 
@@ -278,115 +337,121 @@
             <div class="semester">
                 <h3>高一上學期</h3>
                 <button type="button" class="select-all" data-semester="1">全選本學期</button>
-                <div class="subject"><input type="checkbox" id="s1_1" value="3"><label for="s1_1">國語文 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_2" value="2"><label for="s1_2">英語文 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_3" value="1"><label for="s1_3">本土語 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_4" value="4"><label for="s1_4">數學 (4學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_5" value="2"><label for="s1_5">化學 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_6" value="1"><label for="s1_6">美術 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_7" value="1"><label for="s1_7">資訊科技 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_8" value="1"><label for="s1_8">健康與護理 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_9" value="2"><label for="s1_9">體育 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_10" value="1"><label for="s1_10">全民國防教育 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_11" value="3"><label for="s1_11">基本電學 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_12" value="3"><label for="s1_12">程式設計實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_13" value="3"><label for="s1_13">基礎電子學實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_14" value="2"><label for="s1_14">基礎電路學 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_15" value="1"><label for="s1_15">論孟選讀 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s1_16" value="2"><label for="s1_16">英文文法 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s1_1" value="3" data-type="required"><label for="s1_1">國語文 (3學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_2" value="2" data-type="required"><label for="s1_2">英語文 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_3" value="1" data-type="required"><label for="s1_3">本土語 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_4" value="4" data-type="required"><label for="s1_4">數學 (4學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_5" value="2" data-type="required"><label for="s1_5">化學 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_6" value="1" data-type="required"><label for="s1_6">美術 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_7" value="1" data-type="required"><label for="s1_7">資訊科技 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_8" value="1" data-type="required"><label for="s1_8">健康與護理 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_9" value="2" data-type="required"><label for="s1_9">體育 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_10" value="1" data-type="required"><label for="s1_10">全民國防教育 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_11" value="3" data-type="internship"><label for="s1_11">基本電學 (3學分)<span class="subject-type internship">必修+專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_12" value="3" data-type="both"><label for="s1_12">程式設計實習 (3學分)<span class="subject-type both">必修+實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_13" value="3" data-type="intern"><label for="s1_13">基礎電子學實習 (3學分)<span class="subject-type intern">實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_14" value="2" data-type="major"><label for="s1_14">基礎電路學 (2學分)<span class="subject-type major">專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_15" value="1" data-type="required"><label for="s1_15">論孟選讀 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s1_16" value="2" data-type="required"><label for="s1_16">英文文法 (2學分)<span class="subject-type required">必修</span></label></div>
+
             </div>
 
             <div class="semester">
                 <h3>高一下學期</h3>
                 <button type="button" class="select-all" data-semester="2">全選本學期</button>
-                <div class="subject"><input type="checkbox" id="s2_1" value="3"><label for="s2_1">國語文 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_2" value="2"><label for="s2_2">英語文 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_3" value="1"><label for="s2_3">本土語 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_4" value="4"><label for="s2_4">數學 (4學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_5" value="2"><label for="s2_5">物理 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_6" value="1"><label for="s2_6">美術 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_7" value="1"><label for="s2_7">資訊科技 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_8" value="1"><label for="s2_8">健康與護理 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_9" value="2"><label for="s2_9">體育 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_10" value="1"><label for="s2_10">全民國防教育 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_11" value="3"><label for="s2_11">基本電學 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_12" value="3"><label for="s2_12">基本電學實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_13" value="3"><label for="s2_13">基礎電子學實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_14" value="2"><label for="s2_14">基礎電子學 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_15" value="1"><label for="s2_15">論孟選讀 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s2_16" value="2"><label for="s2_16">英文文法 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s2_1" value="3" data-type="required"><label for="s2_1">國語文 (3學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_2" value="2" data-type="required"><label for="s2_2">英語文 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_3" value="1" data-type="required"><label for="s2_3">本土語 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_4" value="4" data-type="required"><label for="s2_4">數學 (4學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_5" value="2" data-type="required"><label for="s2_5">物理 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_6" value="1" data-type="required"><label for="s2_6">美術 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_7" value="1" data-type="required"><label for="s2_7">資訊科技 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_8" value="1" data-type="required"><label for="s2_8">健康與護理 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_9" value="2" data-type="required"><label for="s2_9">體育 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_10" value="1" data-type="required"><label for="s2_10">全民國防教育 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_11" value="3" data-type="major"><label for="s2_11">基本電學 (3學分)<span class="subject-type internship">必修+專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_12" value="3" data-type="both"><label for="s2_12">基本電學實習 (3學分)<span class="subject-type both">必修+實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_13" value="3" data-type="intern"><label for="s2_13">基礎電子學實習 (3學分)<span class="subject-type intern">實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_14" value="2" data-type="major"><label for="s2_14">基礎電子學 (2學分)<span class="subject-type major">專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_15" value="1" data-type="required"><label for="s2_15">論孟選讀 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s2_16" value="2" data-type="required"><label for="s2_16">英文文法 (2學分)<span class="subject-type required">必修</span></label></div>
+
             </div>
 
             <div class="semester">
                 <h3>高二上學期</h3>
                 <button type="button" class="select-all" data-semester="3">全選本學期</button>
-                <div class="subject"><input type="checkbox" id="s3_1" value="3"><label for="s3_1">國語文 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_2" value="2"><label for="s3_2">英語文 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_3" value="2"><label for="s3_3">地理 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_4" value="1"><label for="s3_4">音樂 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_5" value="2"><label for="s3_5">體育 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_6" value="3"><label for="s3_6">電子學 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_7" value="3"><label for="s3_7">數位邏輯設計 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_8" value="3"><label for="s3_8">電子學實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_9" value="3"><label for="s3_9">可程式邏輯設計實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_10" value="3"><label for="s3_10">行動裝置實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_11" value="4"><label for="s3_11">數學 (4學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_12" value="1"><label for="s3_12">論孟選讀 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s3_13" value="2"><label for="s3_13">英文文法 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s3_1" value="3" data-type="required"><label for="s3_1">國語文 (3學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_2" value="2" data-type="required"><label for="s3_2">英語文 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_3" value="2" data-type="required"><label for="s3_3">地理 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_4" value="1" data-type="required"><label for="s3_4">音樂 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_5" value="2" data-type="required"><label for="s3_5">體育 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_6" value="3" data-type="internship"><label for="s3_6">電子學 (3學分)<span class="subject-type internship">必修+專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_7" value="3" data-type="internship"><label for="s3_7">數位邏輯設計 (3學分)<span class="subject-type internship">必修+專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_8" value="3" data-type="both"><label for="s3_8">電子學實習 (3學分)<span class="subject-type both">必修+實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_9" value="3" data-type="both"><label for="s3_9">可程式邏輯設計實習 (3學分)<span class="subject-type both">必修+實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_10" value="3" data-type="both"><label for="s3_10">行動裝置實習 (3學分)<span class="subject-type both">必修+實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_11" value="4" data-type="required"><label for="s3_11">數學 (4學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_12" value="1" data-type="required"><label for="s3_12">論孟選讀 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s3_13" value="2" data-type="required"><label for="s3_13">英文文法 (2學分)<span class="subject-type required">必修</span></label></div>
+
             </div>
 
             <div class="semester">
                 <h3>高二下學期</h3>
                 <button type="button" class="select-all" data-semester="4">全選本學期</button>
-                <div class="subject"><input type="checkbox" id="s4_1" value="3"><label for="s4_1">國語文 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_2" value="2"><label for="s4_2">英語文 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_3" value="2"><label for="s4_3">歷史 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_4" value="1"><label for="s4_4">音樂 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_5" value="2"><label for="s4_5">體育 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_6" value="3"><label for="s4_6">電子學 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_7" value="3"><label for="s4_7">微處理機 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_8" value="3"><label for="s4_8">電子學實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_9" value="3"><label for="s4_9">單晶片微處理機實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_10" value="3"><label for="s4_10">電腦繪圖實習或數位系統設計實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_11" value="4"><label for="s4_11">數學 (4學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_12" value="1"><label for="s4_12">論孟選讀 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s4_13" value="2"><label for="s4_13">英文文法 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s4_1" value="3" data-type="required"><label for="s4_1">國語文 (3學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_2" value="2" data-type="required"><label for="s4_2">英語文 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_3" value="2" data-type="required"><label for="s4_3">歷史 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_4" value="1" data-type="required"><label for="s4_4">音樂 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_5" value="2" data-type="required"><label for="s4_5">體育 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_6" value="3" data-type="internship"><label for="s4_6">電子學 (3學分)<span class="subject-type internship">必修+專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_7" value="3" data-type="internship"><label for="s4_7">微處理機 (3學分)<span class="subject-type internship">必修+專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_8" value="3" data-type="both"><label for="s4_8">電子學實習 (3學分)<span class="subject-type both">必修+實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_9" value="3" data-type="both"><label for="s4_9">單晶片微處理機實習 (3學分)<span class="subject-type both">必修+實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_10" value="3" data-type="intern"><label for="s4_10">電腦繪圖實習或數位系統設計實習 (3學分)<span class="subject-type intern">實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_11" value="4" data-type="required"><label for="s4_11">數學 (4學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_12" value="1" data-type="required"><label for="s4_12">論孟選讀 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s4_13" value="2" data-type="required"><label for="s4_13">英文文法 (2學分)<span class="subject-type required">必修</span></label></div>
+
             </div>
 
             <div class="semester">
                 <h3>高三上學期</h3>
                 <button type="button" class="select-all" data-semester="5">全選本學期</button>
-                <div class="subject"><input type="checkbox" id="s5_1" value="2"><label for="s5_1">國語文 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_2" value="2"><label for="s5_2">英語文 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_3" value="2"><label for="s5_3">生活科技 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_4" value="2"><label for="s5_4">體育 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_5" value="3"><label for="s5_5">微電腦應用實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_6" value="4"><label for="s5_6">專題實作 (4學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_7" value="3"><label for="s5_7">電路板設計與製作實習或數位電路應用實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_8" value="2"><label for="s5_8">電路學 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_9" value="2"><label for="s5_9">電子電路 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_10" value="2"><label for="s5_10">微電腦結構 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_11" value="4"><label for="s5_11">數學 (4學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_12" value="1"><label for="s5_12">論孟選讀 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s5_13" value="2"><label for="s5_13">英文文法 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s5_1" value="2" data-type="required"><label for="s5_1">國語文 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_2" value="2" data-type="required"><label for="s5_2">英語文 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_3" value="2" data-type="required"><label for="s5_3">生活科技 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_4" value="2" data-type="required"><label for="s5_4">體育 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_5" value="3" data-type="both"><label for="s5_5">微電腦應用實習 (3學分)<span class="subject-type both">必修+實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_6" value="4" data-type="intern"><label for="s5_6">專題實作 (4學分)<span class="subject-type intern">實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_7" value="3" data-type="intern"><label for="s5_7">電路板設計與製作實習或數位電路應用實習 (3學分)<span class="subject-type intern">實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_8" value="2" data-type="major"><label for="s5_8">電路學 (2學分)<span class="subject-type major">專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_9" value="2" data-type="major"><label for="s5_9">電子電路 (2學分)<span class="subject-type major">專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_10" value="2" data-type="experiment"><label for="s5_10">微電腦結構 (2學分)<span class="subject-type experiment">實務</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_11" value="4" data-type="required"><label for="s5_11">數學 (4學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_12" value="1" data-type="required"><label for="s5_12">論孟選讀 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s5_13" value="2" data-type="required"><label for="s5_13">英文文法 (2學分)<span class="subject-type required">必修</span></label></div>
+
             </div>
 
             <div class="semester">
                 <h3>高三下學期</h3>
                 <button type="button" class="select-all" data-semester="6">全選本學期</button>
-                <div class="subject"><input type="checkbox" id="s6_1" value="2"><label for="s6_1">國語文 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_2" value="2"><label for="s6_2">英語文 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_3" value="2"><label for="s6_3">公民 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_4" value="2"><label for="s6_4">體育 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_5" value="3"><label for="s6_5">介面電路控制實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_6" value="4"><label for="s6_6">創意專題實作 (4學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_7" value="3"><label for="s6_7">電子電路實習或嵌入式系統實習 (3學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_8" value="2"><label for="s6_8">電路學 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_9" value="2"><label for="s6_9">電子電路 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_10" value="2"><label for="s6_10">微電腦結構 (2學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_11" value="4"><label for="s6_11">數學 (4學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_12" value="1"><label for="s6_12">論孟選讀 (1學分)</label></div>
-                <div class="subject"><input type="checkbox" id="s6_13" value="2"><label for="s6_13">英文文法 (2學分)</label></div>
+                <div class="subject"><input type="checkbox" id="s6_1" value="2" data-type="required"><label for="s6_1">國語文 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_2" value="2" data-type="required"><label for="s6_2">英語文 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_3" value="2" data-type="required"><label for="s6_3">公民 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_4" value="2" data-type="required"><label for="s6_4">體育 (2學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_5" value="3" data-type="both"><label for="s6_5">介面電路控制實習 (3學分)<span class="subject-type both">必修+實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_6" value="4" data-type="intern"><label for="s6_6">創意專題實作 (4學分)<span class="subject-type intern">實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_7" value="3" data-type="intern"><label for="s6_7">電子電路實習或嵌入式系統實習 (3學分)<span class="subject-type intern">實習</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_8" value="2" data-type="major"><label for="s6_8">電路學 (2學分)<span class="subject-type major">專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_9" value="2" data-type="major"><label for="s6_9">電子電路 (2學分)<span class="subject-type major">專業</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_10" value="2" data-type="experiment"><label for="s6_10">微電腦結構 (2學分)<span class="subject-type experiment">實務</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_11" value="4" data-type="required"><label for="s6_11">數學 (4學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_12" value="1" data-type="required"><label for="s6_12">論孟選讀 (1學分)<span class="subject-type required">必修</span></label></div>
+                <div class="subject"><input type="checkbox" id="s6_13" value="2" data-type="required"><label for="s6_13">英文文法 (2學分)<span class="subject-type required">必修</span></label></div>
+
             </div>
 
             <button type="submit">計算畢業學分</button>
@@ -404,24 +469,21 @@
             let majorCredits = 0;
             let practiceCredits = 0;
 
-            const requiredSubjects = ['國語文', '英語文', '數學', '物理', '化學', '美術', '音樂', '體育', '全民國防教育', '健康與護理', '生活科技', '公民', '歷史', '地理', '本土語', '論孟選讀', '英文文法'];
-            const practiceSubjects = ['程式設計實習', '基本電學實習', '電子學實習', '可程式邏輯設計實習', '行動裝置實習', '單晶片微處理機實習', '微電腦應用實習', '專題實作',  '介面電路控制實習', '創意專題實作', '基礎電子學實習', '電子電路實習或嵌入式系統實習','電路板設計與製作實習或數位電路應用實習','電腦繪圖實習或數位系統設計實習'];
-
             document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(checkbox) {
                 const credits = parseInt(checkbox.value);
-                const subjectName = checkbox.nextElementSibling.textContent.split('(')[0].trim();
+                const subjectType = checkbox.getAttribute('data-type');
 
                 totalCredits += credits;
 
-                if (requiredSubjects.includes(subjectName)) {
+                if (subjectType === 'internship'|| subjectType === 'required' || subjectType === 'both') {
                     requiredCredits += credits;
                 }
 
-                if (!requiredSubjects.includes(subjectName)) {
+                if (subjectType === 'internship' || subjectType === 'both'|| subjectType === 'intern'|| subjectType === 'experiment'|| subjectType === 'major') {
                     majorCredits += credits;
                 }
 
-                if (practiceSubjects.includes(subjectName)) {
+                if ( subjectType === 'both'|| subjectType === 'intern') {
                     practiceCredits += credits;
                 }
             });
